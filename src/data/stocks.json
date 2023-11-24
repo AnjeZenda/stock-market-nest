@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "label": "AAPL",
+    "name": "Apple Inc.",
+    "file": "AAPL.json"
+  },
+  {
+    "id": 2,
+    "label": "SBUX",
+    "name": "Starbucks, Inc.",
+    "file": "SBUX.json"
+  },
+  {
+    "id": 3,
+    "label": "MSFT",
+    "name": "Microsoft, Inc.",
+    "file": "MSFT.json"
+  },
+  {
+    "id": 4,
+    "label": "CSCO",
+    "name": "Cisco Systems, Inc.",
+    "file": "CSCO.json"
+  },
+  {
+    "id": 5,
+    "label": "QCOM",
+    "name": " QUALCOMM Incorporated",
+    "file": "QCOM.json"
+  },
+  {
+    "id": 6,
+    "label": "AMZN",
+    "name": "Amazon.com, Inc.",
+    "file": "AMZN.json"
+  },
+  {
+    "id": 7,
+    "label": "TSLA",
+    "name": "Tesla, Inc.",
+    "file": "TSLA.json"
+  },
+  {
+    "id": 8,
+    "label": "AMD",
+    "name": "Advanced Micro Devices, Inc.",
+    "file": "AMD.json"
+  }
+]
