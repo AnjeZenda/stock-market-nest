@@ -7,6 +7,7 @@ import {
   WebSocketGateway,
 } from '@nestjs/websockets';
 import { SocketService } from './socket.service';
+import axios from 'axios';
 
 @WebSocketGateway({
   cors: {
@@ -59,13 +60,13 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   handleStartEvent(@MessageBody() dto: any, @ConnectedSocket() client: any) {
     console.log(dto);
     this.index = Number(dto.index);
-    const res = { type: 'send', dto };
     console.log(dto.speed);
+    this.broadcast('trading_list', this.list);
     this.broadcast('trading', this.index);
     ++this.index;
     this.interval = setInterval(() => {
       console.log(this.index);
-      // this.broadcast('trading_list', this.list)
+      this.broadcast('trading_list', this.list);
       this.broadcast('trading', this.index);
       ++this.index;
     }, 1000 * dto.speed);
@@ -76,5 +77,21 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     clearInterval(this.interval);
     console.log('stop');
     this.index = 0;
+  }
+
+  @SubscribeMessage('buy')
+  handleBuyEvent(@MessageBody() dto: any, @ConnectedSocket() client: any) {
+    axios.post('http://localhost:8080/brokers/buy', dto).then((res) => {
+      console.log(res.data);
+      this.broadcast('bought', res.data);
+    });
+  }
+
+  @SubscribeMessage('sell')
+  handleSellEvent(@MessageBody() dto: any, @ConnectedSocket() client: any) {
+    axios.post('http://localhost:8080/brokers/sell', dto).then((res) => {
+      console.log(res.data);
+      this.broadcast('sold', res.data);
+    });
   }
 }

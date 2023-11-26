@@ -8,7 +8,7 @@ export interface IBroker {
 export interface IPortfolio {
   label: string;
   count: number;
-  oldPrice: number;
+  sum: number;
 }
 
 export interface IBrokerUpdate {

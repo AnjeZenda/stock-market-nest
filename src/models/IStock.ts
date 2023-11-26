@@ -4,3 +4,10 @@ export interface IStock {
   name: string;
   file: string;
 }
+
+export interface IBoughtStock {
+  userId: number;
+  stockLabel: string;
+  price: number;
+  amount: number;
+}

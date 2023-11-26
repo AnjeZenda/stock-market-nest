@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { BrokersService } from './brokers.service';
 import { IBrokerCreate, IBrokerUpdate } from '../models/IBroker';
+import { IBoughtStock } from '../models/IStock';
 
 @Controller('brokers')
 export class BrokersController {
@@ -21,6 +22,13 @@ export class BrokersController {
   async getAll() {
     return await this.brokersService.getAll();
   }
+
+  @Get(':name')
+  @Header('Content-Type', 'application/json')
+  async getBroker(@Param('name') name: string) {
+    return await this.brokersService.getBroker(name);
+  }
+
   @Post('')
   @HttpCode(HttpStatus.CREATED)
   @Header('Content-Type', 'application/json')
@@ -35,5 +43,15 @@ export class BrokersController {
   @Put(':id')
   async updateBroker(@Param('id') id: string, @Body() broker: IBrokerUpdate) {
     return await this.brokersService.update(parseInt(id), broker);
+  }
+  @Post('buy')
+  @Header('Content-Type', 'applications/json')
+  async buyStock(@Body() boughtStock: IBoughtStock) {
+    return await this.brokersService.buy(boughtStock);
+  }
+  @Post('sell')
+  @Header('Content-Type', 'application/json')
+  async sellStock(@Body() soldStock: IBoughtStock) {
+    return await this.brokersService.sell(soldStock);
   }
 }
