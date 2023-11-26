@@ -94,4 +94,15 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
       this.broadcast('sold', res.data);
     });
   }
+
+  @SubscribeMessage('brokers')
+  handleBrokersChangeEvent(
+    @MessageBody() dto: any,
+    @ConnectedSocket() client: any,
+  ) {
+    axios.get('http://localhost:8080/brokers').then((res) => {
+      console.log(res.data);
+      this.broadcast('brokers', res.data);
+    });
+  }
 }
